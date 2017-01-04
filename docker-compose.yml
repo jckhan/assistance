@@ -1,0 +1,29 @@
+version: "2"
+
+services:
+
+  assistance:
+    build: ./assistance
+    command: nodemon --debug server.js
+    volumes:
+      - ./assistance:/app
+    ports:
+      - "5001:80"
+    networks:
+      - front-tier
+      - back-tier
+
+  db:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - "mongo-data:/data/db"
+    networks:
+      - back-tier
+
+volumes:
+  mongo-data:
+
+networks:
+  front-tier:
+  back-tier:
