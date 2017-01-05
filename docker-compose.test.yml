@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+
+  unit:
+    build: ./assistance
+    volumes:
+      - ./assistance:/app
+    networks:
+      - test
+    entrypoint: mocha test --watch
+
+  db:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - "mongo-data-test:/data/db"
+    networks:
+      - test
+
+volumes:
+  mongo-data-test:
+
+networks:
+  test:

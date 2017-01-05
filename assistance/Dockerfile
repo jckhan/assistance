@@ -3,6 +3,7 @@ FROM node:boron-slim
 WORKDIR /app
 
 RUN npm install -g nodemon
+RUN npm install -g mocha
 ADD package.json /app/package.json
 RUN npm config set registry http://registry.npmjs.org
 RUN npm install && npm ls
@@ -13,4 +14,4 @@ ADD . /app
 ENV PORT 80
 EXPOSE 80
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["node", "server.js"]

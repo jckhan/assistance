@@ -10,5 +10,8 @@
   "license": "",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
   }
 }
