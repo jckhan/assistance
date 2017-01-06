@@ -4,9 +4,14 @@ WORKDIR /app
 
 RUN npm install -g nodemon
 RUN npm install -g mocha
+RUN npm install -g tsc
+RUN npm install -g typescript
+RUN npm install -g concurrently
 ADD package.json /app/package.json
 RUN npm config set registry http://registry.npmjs.org
-RUN npm install && npm ls
+RUN npm install
+ADD client/package.json /app/client/package.json
+RUN npm install /app/client
 RUN mv /app/node_modules /node_modules
 
 ADD . /app
@@ -14,4 +19,4 @@ ADD . /app
 ENV PORT 80
 EXPOSE 80
 
-ENTRYPOINT ["nodemon", "start"]
+ENTRYPOINT ["npm", "start"]

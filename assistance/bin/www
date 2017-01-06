@@ -89,9 +89,8 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-process.on('exit', closeServer());
-process.on('uncaughtException', closeServer())
-process.on('SIGTERM', closeServer())
+process.on('exit', server.close);
+process.on('uncaughtException', server.close);
 
 function closeServer() {
   server.close()
