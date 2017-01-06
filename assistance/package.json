@@ -1,9 +1,9 @@
 {
-  "name": "assistance",
+  "name": "assistance-server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www --debug"
+    "start": "concurrently --kill-others \"nodemon ./bin/www\" \"tsc -w -p ./client\""
   },
   "dependencies": {
     "body-parser": "~1.15.2",

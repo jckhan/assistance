@@ -2,7 +2,7 @@ version: "2"
 
 services:
 
-  assistance:
+  assistance-server:
     build: ./assistance
     volumes:
       - ./assistance:/app
