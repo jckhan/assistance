@@ -2,27 +2,24 @@ version: "2"
 
 services:
 
-  server:
+  unit_back:
     build: ./assistance
     volumes:
       - ./assistance:/app
-    ports:
-      - "5001:80"
     networks:
-      - front-tier
-      - back-tier
+      - test
+    entrypoint: mocha test --watch
 
   db:
     image: mongo
     container_name: mongodb
     volumes:
-      - "mongo-data:/data/db"
+      - "mongo-data-test:/data/db"
     networks:
-      - back-tier
+      - test
 
 volumes:
-  mongo-data:
+  mongo-data-test:
 
 networks:
-  front-tier:
-  back-tier:
+  test:

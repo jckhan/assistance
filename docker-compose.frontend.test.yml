@@ -2,13 +2,14 @@ version: "2"
 
 services:
 
-  unit:
-    build: ./assistance
+  unit_front:
+    build: ./assistance/client
     volumes:
-      - ./assistance:/app
+      - ./assistance/client:/assistance
+    ports:
+      - "5000:9876"
     networks:
       - test
-    entrypoint: mocha test --watch
 
   db:
     image: mongo
