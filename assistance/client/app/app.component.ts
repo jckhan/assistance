@@ -13,28 +13,51 @@ export class AppComponent {
   constructor() {
     this.questions = [
       {
-        controlType: 'text-input',
-        id: 'name',
-        label: 'Nombre',
-        required: true
+        controlType: 'textbox',
+        id: 'text',
+        label: 'Text',
+        required: true,
+        type: 'text'
       },
       {
-        controlType: 'text-input',
-        id: 'user',
-        label: 'MX',
-        required: false
-      },
-      {
-        controlType: 'text-input',
+        controlType: 'textbox',
         id: 'email',
-        label: 'Correo electrónico',
+        label: 'Email',
         required: true,
         type: 'email'
+      },
+      {
+        controlType: 'textbox',
+        id: 'pass',
+        label: 'Password',
+        required: true,
+        type: 'password'
+      },
+      {
+        controlType: 'dropdown',
+        id: 'select',
+        label: 'Select',
+        required: true,
+        options: [
+          { key: 'one', value: 'One' },
+          { key: 'two', value: 'Two' }
+        ]
       },{
-        controlType: 'text-input',
-        id: 'algo',
-        label: 'Prueba',
+        controlType: 'textarea',
+        id: 'area',
+        label: 'Area',
         required: true
+      },
+      {
+        controlType: 'radio',
+        id: 'radio',
+        label: 'Radio',
+        required: true,
+        options: [
+          { key: 'one', value: 'One' },
+          { key: 'two', value: 'Two' },
+          { key: 'three', value: 'Three' }
+        ]
       }
     ];
   }

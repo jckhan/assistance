@@ -1,31 +1,38 @@
-<div class="form-group">
-  <label [attr.for]="question.id">{{ question.label }}</label>
-  <div class="question" [formGroup]="form" [ngSwitch]="question.controlType">
-    <input class="form-control" [id]="question.id" [type]="question.type"
-        [attr.required]="question.required ? true : null"
-        *ngSwitchCase="'text-input'" [formControlName]="question.id">
+<div class="form-group" [formGroup]="form">
+  <label [attr.for]="question.id">{{question.label}}</label>
 
-    <select class="form-control" [id]="question.id"
-        [attr.required]="question.required ? true : null"
-        *ngSwitchCase="'select'" [formControlName]="question.id">
-        <option [value]="answer.value" *ngFor="let answer of question.options">
-            {{ answer.label }}
-        </option>
+  <div [ngSwitch]="question.controlType">
+
+    <input class="form-control" *ngSwitchCase="'textbox'" [formControlName]="question.id"
+           [required]="question.required ? true: null"
+           [id]="question.id" [type]="question.type">
+
+    <select class="form-control" [id]="question.id" *ngSwitchCase="'dropdown'"
+            [required]="question.required ? true: null"
+            [formControlName]="question.id">
+      <option *ngFor="let option of question.options"
+              [value]="option.key">{{option.value}}</option>
     </select>
 
-    <textarea class="form-control" [id]="question.id"
-        *ngSwitchCase="'textarea'" [formControlName]="question.id"></textarea>
+    <textarea class="form-control" rows="3" [id]="question.id"
+              [required]="question.required ? true: null"
+              *ngSwitchCase="'textarea'" [formControlName]="question.id"></textarea>
 
-    <div class="radio-group" *ngSwitchCase="'radio'">
-        <span class="radio" *ngFor="let answer of question.options">
-            <input type="radio" [id]="question.id + answer.value" [value]="answer.value"
-                [formControlName]="question.id">
-            <label [attr.for]="question.id + answer.value">{{ answer.label }}</label>
-        </span>
+    <div *ngSwitchCase="'radio'" [id]="question.id">
+      <label class="radio-inline" [attr.for]="question.id + answer.key"
+             *ngFor="let answer of question.options">
+        <input type="radio" [id]="question.id + answer.key" [value]="answer.value"
+               [formControlName]="question.id"> {{ answer.value }}
+      </label>
     </div>
-    <div [hidden]="isValid"
-             class="alert alert-danger">
-          {{question.label}} is required
-    </div>
-  </div>
+
+    <!-- <div class="checkbox" *ngSwitchCase="'checkbox'" [id]="question.id">
+      <label [attr.for]="question.id + answer.key"
+        *ngFor="let answer of question.options">
+        <input type="checkbox" [id]="question.id + answer.key" [value]="answer.value"
+          [formControlName]="question.id"> {{ answer.value }}
+      </label>
+    </div> -->
+
+  <div class="alert alert-danger" *ngIf="!isValid">{{question.label}} es requerido</div>
 </div>

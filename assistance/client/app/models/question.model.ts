@@ -3,7 +3,12 @@ export interface Question {
   id: string;
   label: string;
   required: boolean;
-  options?: Array<any>;
+  options?: Array<options>;
   type?: string;
   value?: any;
+}
+
+interface options {
+  key: string;
+  value: string;
 }
